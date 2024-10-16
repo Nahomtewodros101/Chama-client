@@ -2,69 +2,52 @@ import React, { useState, useContext } from 'react';
 import { GlobalContext} from '../context/GlobalState';
 
 export const AddTransaction = () => {
+  const { addTransaction } = useContext(GlobalContext);
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
-  const [type, setType] = useState('income');
-
-  const { addTransaction } = useContext(GlobalContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    const newTransaction = {
-      id: Math.floor(Math.random() * 100000000),
+    const transaction = {
+      id: Math.floor(Math.random() * 100000),
       text,
-      amount: type === 'expense' ? -amount : +amount,
+      amount: +amount,
     };
-
-    if (text && !isNaN(amount)) {
-      addTransaction(newTransaction);
-      setText('');
-      setAmount(0);
-    } else {
-      alert('Please enter valid text and amount');
-    }
+    addTransaction(transaction);
+    setText('');
+    setAmount(0);
   };
 
   return (
-    <div className="bg-gradient-to-r from-purple-400 to-blue-500 p-6 rounded-lg shadow-md">
-      <h3 className="text-white text-lg font-semibold mb-4">Add New Transaction</h3>
-      <form onSubmit={onSubmit}>
-        <div className="mb-4">
-          <label htmlFor="text" className="text-white">Text</label>
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Enter text..."
-            className="mt-1 p-2 w-full rounded-md border border-gray-300"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="amount" className="text-white">Amount <br />(negative - expense, positive - income)</label>
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="Enter amount..."
-            className="mt-1 p-2 w-full rounded-md border border-gray-300"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="type" className="text-white">Type</label>
-          <select
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            className="mt-1 p-2 w-full rounded-md border border-gray-300"
-          >
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
-          </select>
-        </div>
-        <button className="bg-white text-blue-500 font-semibold p-2 rounded-md transition hover:bg-blue-200">Add Transaction</button>
+    <div className="mb-4">
+      <h3 className="text-lg">Add new transaction</h3>
+      <form onSubmit={onSubmit} className="flex flex-col md:flex-row justify-between">
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Enter transaction..."
+          className="border rounded p-2 mb-2 md:mb-0 md:mr-2 flex-1"
+          required
+        />
+        <input
+          type="number"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          placeholder="Enter amount..."
+          className="border rounded p-2 mb-2 md:mb-0 flex-1"
+          required
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white rounded p-2"
+        >
+          Add transaction
+        </button>
       </form>
     </div>
   );
 };
+
 
 export default AddTransaction;

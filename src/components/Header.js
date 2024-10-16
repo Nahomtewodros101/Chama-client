@@ -1,10 +1,6 @@
-import React from 'react';
-
 const Header = () => {
   return (
-    <h2 className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center p-4 rounded-lg shadow-md mb-4">
-      Expense Tracker
-    </h2>
+    <h1 className="text-center text-2xl font-bold mb-4">Expense Tracker</h1>
   );
 };
 

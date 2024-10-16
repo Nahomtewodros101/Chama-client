@@ -8,10 +8,9 @@ import TransactionList from './components/TransactionList';
 import AddTransaction from './components/AddTransactions';
 
 const App = () => {
-  return (
-    <GlobalProvider>
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 animate-gradient-bg">
-        <div className="container mx-auto p-4 bg-white rounded-lg shadow-lg">
+    return (
+      <GlobalProvider>
+        <div className="container mx-auto p-4 md:p-8">
           <Header />
           <Balance />
           <IncomeExpenses />
@@ -19,9 +18,9 @@ const App = () => {
           <TransactionList />
           <AddTransaction />
         </div>
-      </div>
-    </GlobalProvider>
-  );
-};
-
-export default App;
+      </GlobalProvider>
+    );
+  };
+  
+  export default App;
+  
